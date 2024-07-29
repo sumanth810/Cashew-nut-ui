@@ -9,7 +9,7 @@ const FormInput = ({ id, name, value, onChange }) => {
       <input
         type="number"
         id={id}
-        name={id}
+        name={name}
         value={value}
         onChange={onChange}
         required

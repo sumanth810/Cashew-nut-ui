@@ -7,15 +7,29 @@ const FormContainer = ({ formData, handleChange, handleSubmit }) => {
     <div className="container">
       <div className="form-title">Fill the Details of Cashew Batch Data</div>
       <form onSubmit={handleSubmit}>
-        {Object.keys(formData).map((key) => (
-          <FormInput
-            key={key}
-            id={key}
-            name={key}
-            value={formData[key]}
+        <div className="form-group">
+          <label htmlFor="date">DATE:</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={formData.date}
             onChange={handleChange}
+            required
           />
-        ))}
+        </div>
+        {Object.keys(formData).map(
+          (key) =>
+            key !== "date" && (
+              <FormInput
+                key={key}
+                id={key}
+                name={key}
+                value={formData[key]}
+                onChange={handleChange}
+              />
+            )
+        )}
         <FormSubmitButton />
       </form>
     </div>
