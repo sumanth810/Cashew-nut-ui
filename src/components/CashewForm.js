@@ -55,6 +55,20 @@ const CashewForm = () => {
       .then((data) => {
         alert("Form submitted successfully!");
         console.log("Success:", data);
+        // Clear the form data after successful submission
+        setFormData({
+          date: new Date().toISOString().split("T")[0],
+          todayIntake: "",
+          shellingIntake: "",
+          peelingIntake: "",
+          gradingIntake: "",
+          todayOutput: "",
+          shellingOutput: "",
+          peelingOutput: "",
+          whiteWholesOutput: "",
+          scorchedWholesOutput: "",
+          cashewFormsOutput: "",
+        });
       })
       .catch((error) => {
         alert("Failed to submit form: " + error.message);
