@@ -2,8 +2,8 @@ import React from "react";
 
 const FormInput = ({ id, name, value, onChange }) => {
   return (
-    <div className="form-group">
-      <label htmlFor={id}>
+    <div className="w-full">
+      <label htmlFor={id} className="block mb-2">
         {name.replace(/([A-Z])/g, " $1").toUpperCase()} (kgs):
       </label>
       <input
@@ -13,6 +13,7 @@ const FormInput = ({ id, name, value, onChange }) => {
         value={value}
         onChange={onChange}
         required
+        className="w-full p-2 border border-gray-300 rounded"
       />
     </div>
   );

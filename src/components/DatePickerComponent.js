@@ -1,19 +1,15 @@
-// src/components/DatePickerComponent.js
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../styles.css";
 
-const DatePickerComponent = ({ selectedDate, onDateChange }) => {
+const DatePickerComponent = ({ selected, onChange }) => {
   return (
-    <div className="date-header">
-      <span>DATE:</span>
-      <DatePicker
-        selected={selectedDate}
-        onChange={onDateChange}
-        dateFormat="yyyy-MM-dd"
-        className="date-picker"
-      />
-    </div>
+    <DatePicker
+      selected={selected}
+      onChange={onChange}
+      className="border border-gray-300 rounded p-2"
+    />
   );
 };
 

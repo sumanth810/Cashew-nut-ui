@@ -34,7 +34,7 @@ const CashewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form data on submit:", formData); // Debugging line
+    console.log("Form data on submit:", formData);
 
     fetch("/api/cashew-process/batchdata", {
       method: "POST",
@@ -55,7 +55,6 @@ const CashewForm = () => {
       .then((data) => {
         alert("Form submitted successfully!");
         console.log("Success:", data);
-        // Clear the form data after successful submission
         setFormData({
           date: new Date().toISOString().split("T")[0],
           todayIntake: "",

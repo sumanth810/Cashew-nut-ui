@@ -4,11 +4,18 @@ import FormSubmitButton from "./FormSubmitButton";
 
 const FormContainer = ({ formData, handleChange, handleSubmit }) => {
   return (
-    <div className="container">
-      <div className="form-title">Fill the Details of Cashew Batch Data</div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="date">DATE:</label>
+    <div className="bg-purple-100 p-8 rounded-lg shadow-md mx-auto my-10 w-3/4 md:w-1/2">
+      <div className="text-center text-blue-700 text-4xl font-bold mb-5">
+        Fill the Details of Cashew Batch Data
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center space-y-4"
+      >
+        <div className="w-full">
+          <label htmlFor="date" className="block mb-2">
+            DATE:
+          </label>
           <input
             type="date"
             id="date"
@@ -16,6 +23,7 @@ const FormContainer = ({ formData, handleChange, handleSubmit }) => {
             value={formData.date}
             onChange={handleChange}
             required
+            className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
         {Object.keys(formData).map(

@@ -1,10 +1,9 @@
 import React from "react";
-import "../styles.css";
 
 const FormHeader = () => {
   return (
-    <header className="header">
-      <div className="title">MASCOF</div>
+    <header className="header bg-purple-500 p-4 text-center">
+      <div className="title text-white text-4xl font-bold">MASCOF</div>
     </header>
   );
 };
