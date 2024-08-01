@@ -5,10 +5,11 @@ import "../styles.css"; // Ensure TailwindCSS is imported properly
 const Sidebar = () => {
   // Function to determine link classes based on active state
   const linkClasses = (isActive) => {
-    const baseClasses = "w-full p-3 rounded mb-2 text-center";
+    const baseClasses =
+      "w-full p-3 rounded mb-2 text-center transition-all border-4"; // Increased border thickness
     return isActive
-      ? `${baseClasses} bg-green-500 text-white`
-      : `${baseClasses} bg-blue-100 text-black hover:bg-red-500 hover:text-white`;
+      ? `${baseClasses} bg-orange-700 text-white border-orange-800 shadow-md`
+      : `${baseClasses} bg-orange-100 text-black border-orange-300 hover:bg-orange-400 hover:text-white hover:border-orange-400`;
   };
 
   return (
