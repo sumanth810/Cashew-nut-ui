@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
+import { format, subDays, addDays } from "date-fns";
 import Overview from "./Overview";
 import Shelling from "./Shelling";
 import Peeling from "./Peeling";
@@ -40,10 +40,30 @@ const Dashboard = () => {
       });
   }, [date]);
 
+  const handlePreviousDate = () => {
+    setDate(subDays(date, 1));
+  };
+
+  const handleNextDate = () => {
+    setDate(addDays(date, 1));
+  };
+
   return (
     <div className="p-5 flex flex-col space-y-5">
       <div className="flex justify-end items-center mb-5">
+        <button
+          onClick={handlePreviousDate}
+          className="mr-2 bg-blue-500 text-white py-2 px-4 rounded"
+        >
+          Previous date
+        </button>
         <DatePickerComponent selected={date} onChange={setDate} />
+        <button
+          onClick={handleNextDate}
+          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded"
+        >
+          Next date
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">

@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "../styles.css"; // Ensure TailwindCSS is imported properly
+import "../styles.css";
 
 const Sidebar = () => {
   // Function to determine link classes based on active state
   const linkClasses = (isActive) => {
     const baseClasses =
-      "w-full p-3 rounded mb-2 text-center transition-all border-4"; // Increased border thickness
+      "w-full p-3 rounded mb-2 text-center transition-all border-4";
     return isActive
       ? `${baseClasses} bg-orange-700 text-white border-orange-800 shadow-md`
       : `${baseClasses} bg-orange-100 text-black border-orange-300 hover:bg-orange-400 hover:text-white hover:border-orange-400`;
