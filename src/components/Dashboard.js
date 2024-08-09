@@ -1,69 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { format, subDays, addDays } from "date-fns";
+import { format } from "date-fns";
 import Overview from "./Overview";
 import Shelling from "./Shelling";
 import Peeling from "./Peeling";
 import Grading from "./Grading";
 import DatePickerComponent from "./DatePickerComponent";
 
-const defaultData = {
-  todayIntake: 0,
-  todayOutput: 0,
-  shellingIntake: 0,
-  shellingOutput: 0,
-  peelingIntake: 0,
-  peelingOutput: 0,
-  gradingIntake: 0,
-  whiteWholesOutput: 0,
-  scorchedWholesOutput: 0,
-  cashewFormsOutput: 0,
-};
-
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState(null);
 
+  // Fetch data when the date changes
   useEffect(() => {
-    const formattedDate = format(date, "yyyy-MM-dd");
-    fetch(`/api/cashew-process/batchdata?date=${formattedDate}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setData(data[0]); // Assuming the API returns an array
-        } else {
-          setData(defaultData); // Set default values if no data
+    const fetchData = async (selectedDate) => {
+      const formattedDate = format(selectedDate, "yyyy-MM-dd");
+      const token = localStorage.getItem("jwtToken");
+
+      try {
+        const response = await fetch(
+          `/api/cashew-process/batchdata?date=${formattedDate}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
         }
-      })
-      .catch((error) => {
+        const result = await response.json();
+        setData(result[0] || null); // Handle case when there's no data
+      } catch (error) {
         console.error("Error fetching data:", error);
-        setData(defaultData); // Set default values in case of an error
-      });
+        setData(null); // Set data to null in case of an error
+      }
+    };
+
+    fetchData(date);
   }, [date]);
-
-  const handlePreviousDate = () => {
-    setDate(subDays(date, 1));
-  };
-
-  const handleNextDate = () => {
-    setDate(addDays(date, 1));
-  };
 
   return (
     <div className="p-5 flex flex-col space-y-5">
       <div className="flex justify-end items-center mb-5">
-        <button
-          onClick={handlePreviousDate}
-          className="mr-2 bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Previous date
-        </button>
         <DatePickerComponent selected={date} onChange={setDate} />
-        <button
-          onClick={handleNextDate}
-          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Next date
-        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">

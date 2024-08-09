@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,10 +11,20 @@ import Trends from "./components/Trends";
 import FormHeader from "./components/FormHeader";
 import Sidebar from "./components/Sidebar";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import "./styles.css";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(
+    !!localStorage.getItem("jwtToken")
+  );
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setAuthenticated(!!localStorage.getItem("jwtToken"));
+    };
+    checkAuth();
+  }, []);
 
   return (
     <Router>
@@ -25,18 +35,34 @@ const App = () => {
           <Routes>
             <Route
               path="/login"
-              element={<Login setIsAuthenticated={setIsAuthenticated} />}
+              element={<Login setAuthenticated={setAuthenticated} />}
             />
-            {isAuthenticated ? (
-              <>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/forms" element={<CashewForm />} />
-                <Route path="/trends" element={<Trends />} />
-                <Route path="/" element={<Dashboard />} />
-              </>
-            ) : (
-              <Route path="*" element={<Navigate to="/login" />} />
-            )}
+            <Route
+              path="/dashboard"
+              element={
+                isAuthenticated ? <Dashboard /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/forms"
+              element={
+                isAuthenticated ? <CashewForm /> : <Navigate to="/login" />
+              }
+            />
+            <Route
+              path="/trends"
+              element={isAuthenticated ? <Trends /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/logout"
+              element={<Logout setAuthenticated={setAuthenticated} />}
+            />
+            <Route
+              path="/"
+              element={
+                isAuthenticated ? <Dashboard /> : <Navigate to="/login" />
+              }
+            />
           </Routes>
         </div>
       </div>

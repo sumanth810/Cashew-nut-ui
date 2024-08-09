@@ -34,12 +34,15 @@ const CashewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("jwtToken"); // Get the JWT token from localStorage
+
     console.log("Form data on submit:", formData);
 
     fetch("/api/cashew-process/batchdata", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include JWT token in the Authorization header
       },
       body: JSON.stringify(formData),
     })
