@@ -5,24 +5,28 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Grading = ({ data }) => {
+  // Extract grading-related data from props
   const whiteWholesOutput = data?.whiteWholesOutput || 0;
   const scorchedWholesOutput = data?.scorchedWholesOutput || 0;
   const cashewFormsOutput = data?.cashewFormsOutput || 0;
   const gradingOutput =
-    whiteWholesOutput + scorchedWholesOutput + cashewFormsOutput;
+    whiteWholesOutput + scorchedWholesOutput + cashewFormsOutput; // Calculate total output
   const gradingIntake = data?.gradingIntake || 0;
+
+  // Calculate turn-around ratio
   const turnAroundRatio =
     gradingIntake !== 0
       ? ((gradingOutput / gradingIntake) * 100).toFixed(2)
       : "0";
 
+  // Data for pie chart
   const chartData = {
     labels: ["White Wholes", "Scorched Wholes", "Cashew Forms"],
     datasets: [
       {
         label: "Grading Output",
         data: [whiteWholesOutput, scorchedWholesOutput, cashewFormsOutput],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"], // Colors for chart
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
@@ -43,6 +47,7 @@ const Grading = ({ data }) => {
         Turn-around ratio: {turnAroundRatio} %
       </div>
       <div className="mt-5">
+        {/* Render pie chart */}
         <Pie data={chartData} />
       </div>
     </div>

@@ -9,9 +9,10 @@ const FormContainer = ({ formData, handleChange, handleSubmit }) => {
         Fill the Details of Cashew Batch Data
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} // Attach submit handler to form
         className="flex flex-col items-center space-y-4"
       >
+        {/* Input field for the date */}
         <div className="w-full">
           <label htmlFor="date" className="block mb-2">
             DATE:
@@ -20,12 +21,13 @@ const FormContainer = ({ formData, handleChange, handleSubmit }) => {
             type="date"
             id="date"
             name="date"
-            value={formData.date}
-            onChange={handleChange}
+            value={formData.date} // Controlled input value
+            onChange={handleChange} // Handle changes
             required
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
+        {/* Generate inputs dynamically for all other fields */}
         {Object.keys(formData).map(
           (key) =>
             key !== "date" && (
@@ -38,6 +40,7 @@ const FormContainer = ({ formData, handleChange, handleSubmit }) => {
               />
             )
         )}
+        {/* Submit button for the form */}
         <FormSubmitButton />
       </form>
     </div>

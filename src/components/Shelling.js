@@ -1,8 +1,11 @@
 import React from "react";
 
 const Shelling = ({ data }) => {
-  const shellingIntake = data?.shellingIntake || 0;
-  const shellingOutput = data?.shellingOutput || 0;
+  // Extract shelling-specific data from props
+  const shellingIntake = data?.shellingIntake || 0; // Intake for shelling
+  const shellingOutput = data?.shellingOutput || 0; // Output from shelling
+
+  // Calculate turn-around ratio
   const turnAroundRatio =
     shellingIntake !== 0
       ? ((shellingOutput / shellingIntake) * 100).toFixed(2)
@@ -13,12 +16,15 @@ const Shelling = ({ data }) => {
       <h3 className="text-xl font-bold mb-6 text-purple-900 italic text-center">
         Shelling
       </h3>
+      {/* Display shelling intake */}
       <div className="text-lg font mb-4">
         Today's intake: {shellingIntake} kgs
       </div>
+      {/* Display shelling output */}
       <div className="text-lg font mb-4">
         Today's output: {shellingOutput} kgs
       </div>
+      {/* Display turn-around ratio */}
       <div className="text-lg font mb-4">
         Turn-around ratio: {turnAroundRatio} %
       </div>

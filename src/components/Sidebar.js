@@ -14,7 +14,7 @@ const Sidebar = () => {
 
   return (
     <div className="bg-gray-100 p-5 w-56 flex flex-col items-center">
-      <img src="logo.png" alt="Logo" className="h-24 w-24 rounded-full mb-5" />
+      {/* Navigation links */}
       <NavLink
         to="/dashboard"
         className={({ isActive }) => linkClasses(isActive)}

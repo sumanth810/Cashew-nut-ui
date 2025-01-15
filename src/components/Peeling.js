@@ -1,8 +1,11 @@
 import React from "react";
 
 const Peeling = ({ data }) => {
-  const peelingIntake = data?.peelingIntake || 0;
-  const peelingOutput = data?.peelingOutput || 0;
+  // Extract peeling-specific data from props
+  const peelingIntake = data?.peelingIntake || 0; // Intake for peeling
+  const peelingOutput = data?.peelingOutput || 0; // Output from peeling
+
+  // Calculate turn-around ratio
   const turnAroundRatio =
     peelingIntake !== 0
       ? ((peelingOutput / peelingIntake) * 100).toFixed(2)
@@ -13,12 +16,15 @@ const Peeling = ({ data }) => {
       <h3 className="text-xl font-bold mb-6 text-purple-900 italic text-center">
         Peeling
       </h3>
+      {/* Display peeling intake */}
       <div className="text-lg font mb-4">
         Today's intake: {peelingIntake} kgs
       </div>
+      {/* Display peeling output */}
       <div className="text-lg font mb-4">
         Today's output: {peelingOutput} kgs
       </div>
+      {/* Display turn-around ratio */}
       <div className="text-lg font mb-4">
         Turn-around ratio: {turnAroundRatio} %
       </div>

@@ -3,6 +3,7 @@ import React from "react";
 const FormSubmitButton = () => {
   return (
     <div className="mb-4 w-full flex justify-center">
+      {/* Submit button */}
       <input
         type="submit"
         value="Submit"
