@@ -82,7 +82,7 @@ This is a web application for managing and visualizing cashew batch processing d
 
 ## Technology Stack
 - **Frontend**: React.js, React Router, Chart.js, Tailwind CSS.
-- **Backend**: Expected REST API for data handling (e.g., Node.js, Django).
+- **Backend**: Expected REST API for data handling (e.g., Java).
 - **Authentication**: JWT-based token authentication.
 
 ## Setup Instructions
